@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Organizer Dashboard</h1>
+
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer" id="total-events">
+        <h2 class="text-lg font-semibold">Total Events</h2>
+        <p class="text-2xl font-bold">{{ total_events }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer" id="upcoming-events">
+        <h2 class="text-lg font-semibold">Upcoming Events</h2>
+        <p class="text-2xl font-bold">{{ upcoming_events }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer" id="past-events">
+        <h2 class="text-lg font-semibold">Past Events</h2>
+        <p class="text-2xl font-bold">{{ past_events }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer">
+        <h2 class="text-lg font-semibold">Total Participants</h2>
+        <p class="text-2xl font-bold">{{ total_participants }}</p>
+    </div>
+</div>
+
+<!-- Today's Events -->
+<h2 class="text-xl font-semibold mb-3">Today's Events</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for event in todays_events %}
+    <div class="bg-white p-4 rounded-lg shadow">
+        <h3 class="text-lg font-semibold">{{ event.name }}</h3>
+        <p class="text-gray-600">{{ event.date }} | {{ event.time }}</p>
+        <p class="text-gray-600">Participants: {{ event.participants.count }}</p>
+    </div>
+    {% empty %}
+    <p>No events scheduled for today.</p>
+    {% endfor %}
+</div>
+
+<!-- Optional: Add JS for interactive stats filtering -->
+<script>
+const totalEventsDiv = document.getElementById('total-events');
+const upcomingEventsDiv = document.getElementById('upcoming-events');
+const pastEventsDiv = document.getElementById('past-events');
+
+totalEventsDiv.addEventListener('click', () => {
+    alert('Filter to show all events');
+});
+
+upcomingEventsDiv.addEventListener('click', () => {
+    alert('Filter to show upcoming events');
+});
+
+pastEventsDiv.addEventListener('click', () => {
+    alert('Filter to show past events');
+});
+</script>
+
+{% endblock %}
