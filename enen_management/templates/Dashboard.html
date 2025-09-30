@@ -19,7 +19,7 @@
         <h2 class="text-lg font-semibold">Past Events</h2>
         <p class="text-2xl font-bold">{{ past_events }}</p>
     </div>
-    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer">
+    <div class="bg-white p-4 rounded-lg shadow text-center hover:bg-blue-50 cursor-pointer" id="total-participants">
         <h2 class="text-lg font-semibold">Total Participants</h2>
         <p class="text-2xl font-bold">{{ total_participants }}</p>
     </div>
@@ -39,22 +39,22 @@
     {% endfor %}
 </div>
 
-<!-- Optional: Add JS for interactive stats filtering -->
+<!-- JS: Redirect to past events page -->
 <script>
-const totalEventsDiv = document.getElementById('total-events');
-const upcomingEventsDiv = document.getElementById('upcoming-events');
-const pastEventsDiv = document.getElementById('past-events');
-
-totalEventsDiv.addEventListener('click', () => {
-    alert('Filter to show all events');
+document.getElementById('past-events').addEventListener('click', () => {
+    window.location.href = "{% url 'past_events' %}";
 });
-
-upcomingEventsDiv.addEventListener('click', () => {
-    alert('Filter to show upcoming events');
+document.getElementById('total-events').addEventListener('click', () => {
+    window.location.href = "{% url 'total_events' %}";
 });
-
-pastEventsDiv.addEventListener('click', () => {
-    alert('Filter to show past events');
+document.getElementById('upcoming-events').addEventListener('click', () => {
+    window.location.href = "{% url 'upcoming_event' %}";
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const participantsDiv = document.getElementById('total-participants');
+    participantsDiv.addEventListener('click', () => {
+        window.location.href = "{% url 'participants' %}";
+    });
 });
 </script>
 

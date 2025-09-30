@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Upcoming Events{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Upcoming Events</h1>
+
+{% if  upcoming_event %}
+    <ul>
+    {% for event in  upcoming_event %}
+        <li>{{ event.name }} - {{ event.date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No upcoming_event found.</p>
+{% endif %}
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

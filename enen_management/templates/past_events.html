@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Past Events{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Past Events</h1>
+
+{% if past_events %}
+    <ul>
+    {% for event in past_events %}
+        <li>{{ event.name }} - {{ event.date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No past events found.</p>
+{% endif %}
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}
